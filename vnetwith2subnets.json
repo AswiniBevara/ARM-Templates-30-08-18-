@@ -1,0 +1,52 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "subnet1Name": {
+            "type": "string"
+        },
+        "subnet2Name": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "location": "centralus",
+        "addressPrefix": "10.0.0.0/16",
+        "subnet1AddressPrefix": "10.0.0.0/24",
+        "subnet2AddressPrefix": "10.0.1.0/24",
+        "enableDdosProtection": "false"
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-04-01",
+            "name": "[parameters('name')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "[variables('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[variables('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnet1Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('subnet1AddressPrefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnet2Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('subnet2AddressPrefix')]"
+                        }
+                    }
+                ],
+                "enableDdosProtection": "[variables('enableDdosProtection')]"
+            }
+        }
+    ]
+}
