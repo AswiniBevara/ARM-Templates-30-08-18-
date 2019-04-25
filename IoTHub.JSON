@@ -4,7 +4,6 @@
     "parameters": {
         "name": {
             "type": "string",
-            "defaultValue": "myHub13",
             "metadata": {
                 "description": "Name of the IoT Hub"
             }
